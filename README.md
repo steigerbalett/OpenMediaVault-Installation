@@ -2,11 +2,13 @@
 Installscript for OMV on RaspberryPi
 (with Raspian 9 lite) install:
 
+
 cd /tmp
 
 wget https://raw.githubusercontent.com/steigerbalett/OpenMediaVault-Installation/master/omv-rpi-install.sh
 
 sudo bash omv-rpi-install.sh
+
 
 After installation & reboot you can access your OMV thru a browser http://x.x.x.x
 User: admin
