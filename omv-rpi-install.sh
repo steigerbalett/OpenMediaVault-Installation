@@ -40,6 +40,49 @@ else
   exit
 fi
 
+#Checking Memory Requirements
+clear
+echo 'Step 1: Checking minimum system memory requirements...'
+memtotal=$(cat /proc/meminfo | grep MemTotal | grep -o '[0-9]*')
+swaptotal=$(cat /proc/meminfo | grep SwapTotal | grep -o '[0-9]*')
+echo Your total system memory is $memtotal
+echo Your total system swap is $swaptotal
+totalmem=$(($memtotal + $swaptotal))
+echo Your effective total system memory is $totalmem
+
+if [[ $totalmem -lt 900000 ]]
+  then
+    echo You have insufficient memory to run OpenMediaVault, minimum 1 GB
+    echo -n 'Do you want to create a 1 G swap file? [Y/n] '
+    read swapfiledecision
+      if [[ $swapfiledecision =~ (Y|y) ]]
+        then
+          echo 'Creating 1 G swap file...'
+            sudo fallocate -l 1G /swapfile
+            sudo chmod 600 /swapfile
+            sudo mkswap /swapfile
+            sudo swapon /swapfile
+            sudo cp /etc/fstab /etc/fstab.bak
+            echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab > /dev/null
+          echo '1 G swap file successfully created!'
+      elif [[ $swapfiledecision =~ (n) ]]
+        then
+          echo No swap file was created!
+          echo Insufficient memory to run OpenMediaVault
+          echo Exiting...
+          exit
+      else
+        echo Input error!
+        echo No swap file was created!
+        echo Please start again
+        echo Exiting...
+        exit
+      fi
+else
+  echo 'You have enough memory to meet the requirements! :-)'
+fi
+
+
 # Adding OpenMediaVault to the repository
 echo 'Step 1: Adding OpenMediaVault to the repository'
 echo ''
