@@ -86,26 +86,25 @@ fi
 # Adding OpenMediaVault to the repository
 echo 'Step 1: Adding OpenMediaVault to the repository'
 echo ''
-#wget -q "http://packages.openmediavault.org/public.gpg" -O - | sudo apt-key add -
-#echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sources.list.d/openmediavault.list
+echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sources.list.d/openmediavault.list
 # Alternatives
-echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis main"  > /etc/apt/sources.list.d/openmediavault.list
+#echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis main"  > /etc/apt/sources.list.d/openmediavault.list
 ## This software is not part of OpenMediaVault, but is offered by third-party
 ## developers as a service to OpenMediaVault users.
-echo -n 'Do you want install OMV third-party option to the repository? [Y/n] '
-read partnersdecision
-
-if [[ $partnersdecision =~ (Y|y) ]]
-  then
+#echo -n 'Do you want install OMV third-party option to the repository? [Y/n] '
+#read partnersdecision
+#
+#if [[ $partnersdecision =~ (Y|y) ]]
+#  then
 #echo "deb http://packages.openmediavault.org/public arrakis partner" > /etc/apt/sources.list.d/openmediavault.list
-echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis partner" > /etc/apt/sources.list.d/openmediavault.list
-echo 'done'
-elif [[ $partnersdecision =~ (n) ]]
-  then
-    echo 'No modifications was made'
- else
-    echo 'Invalid input!'
-fi
+##echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis partner" > /etc/apt/sources.list.d/openmediavault.list
+#echo 'done'
+#elif [[ $partnersdecision =~ (n) ]]
+#  then
+#    echo 'No modifications was made'
+# else
+#    echo 'Invalid input!'
+#fi
 
 ## This software is not part of OpenMediaVault, but is offered by third-party
 ## developers as a service to OpenMediaVault users.
@@ -115,17 +114,18 @@ fi
 clear
 echo Step 2: Installing OpenMediaVault...
 sudo apt update && sudo apt full-upgrade -y
-
+sudo apt install dirmngr
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7E7A6C592EF35D13 24863F0C716B980B 
 #Option to generate new SSH Key
 echo -n 'Do you want generate a new SSH Key? [Y/n] '
 read sshdecision
 
-if [[ $read sshdecision =~ (Y|y) ]]
+if [[ $sshdecision =~ (Y|y) ]]
   then
 sudo rm /etc/ssh/ssh_host_*
 sudo dpkg-reconfigure openssh-server
 echo 'done'
-elif [[ $read sshdecision =~ (n) ]]
+elif [[ $sshdecision =~ (n) ]]
   then
     echo 'No modifications was made'
  else
@@ -164,7 +164,6 @@ echo 'Step 5: enable autostart'
 sudo systemctl enable openmediavault
 sudo systemctl start openmediavault
 
-clear
 echo 'OpenMediaVault has been installed & modified to your preference (if any)!'
 echo 'Share this with others if this script has helped you!'
 echo 'After reboot you can login to OMV thru a browser with'
