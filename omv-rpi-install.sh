@@ -113,15 +113,14 @@ fi
 #Installing OpenMediaVault
 clear
 echo Step 2: Installing OpenMediaVault...
-
-sudo apt update
-sudo apt --allow-unauthenticated install openmediavault-keyring
 sudo apt update && sudo apt full-upgrade -y
 sudo rm /etc/ssh/ssh_host_*
 sudo dpkg-reconfigure openssh-server
 sudo apt install ntfs-3g hdparm hfsutils hfsprogs exfat-fuse -y
-sudo apt install postfix
-sudo apt install openmediavault
+sudo apt update
+sudo apt install openmediavault-keyring postfix -y
+sudo apt update
+sudo apt install openmediavault -y
 
 # check for dependencies
 sudo apt --fix-broken install -y
@@ -149,6 +148,7 @@ echo 'Step 5: enable autostart'
 sudo systemctl enable openmediavault
 sudo systemctl start openmediavault
 
+clear
 echo 'OpenMediaVault has been installed & modified to your preference (if any)!'
 echo 'Share this with others if this script has helped you!'
 echo 'After reboot you can login to OMV thru a browser with'
