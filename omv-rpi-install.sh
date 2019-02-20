@@ -115,8 +115,23 @@ fi
 clear
 echo Step 2: Installing OpenMediaVault...
 sudo apt update && sudo apt full-upgrade -y
+
+#Option to generate new SSH Key
+echo -n 'Do you want generate a new SSH Key? [Y/n] '
+read sshdecision
+
+if [[ $read sshdecision =~ (Y|y) ]]
+  then
 sudo rm /etc/ssh/ssh_host_*
 sudo dpkg-reconfigure openssh-server
+echo 'done'
+elif [[ $read sshdecision =~ (n) ]]
+  then
+    echo 'No modifications was made'
+ else
+    echo 'Invalid input!'
+fi
+
 sudo apt install ntfs-3g hdparm hfsutils hfsprogs exfat-fuse -y
 sudo apt update
 sudo apt install openmediavault-keyring postfix -y
