@@ -120,12 +120,12 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7E7A6C592EF35D13 2
 echo -n 'Do you want generate a new SSH Key? [Y/n] '
 read sshdecision
 
-if [[ $read sshdecision =~ (Y|y) ]]
+if [[ $sshdecision =~ (Y|y) ]]
   then
 sudo rm /etc/ssh/ssh_host_*
 sudo dpkg-reconfigure openssh-server
 echo 'done'
-elif [[ $read sshdecision =~ (n) ]]
+elif [[ $sshdecision =~ (n) ]]
   then
     echo 'No modifications was made'
  else
