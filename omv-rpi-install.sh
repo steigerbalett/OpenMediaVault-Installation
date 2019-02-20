@@ -86,10 +86,10 @@ fi
 # Adding OpenMediaVault to the repository
 echo 'Step 1: Adding OpenMediaVault to the repository'
 echo ''
-#wget -q "http://packages.openmediavault.org/public.gpg" -O - | sudo apt-key add -
+
 #echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sources.list.d/openmediavault.list
 # Alternatives
-echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis main"  > /etc/apt/sources.list.d/openmediavault.list
+echo "deb [trusted=yes] http://downloads.sourceforge.net/project/openmediavault/packages arrakis main"  > /etc/apt/sources.list.d/openmediavault.list
 ## This software is not part of OpenMediaVault, but is offered by third-party
 ## developers as a service to OpenMediaVault users.
 echo -n 'Do you want install OMV third-party option to the repository? [Y/n] '
@@ -98,7 +98,7 @@ read partnersdecision
 if [[ $partnersdecision =~ (Y|y) ]]
   then
 #echo "deb http://packages.openmediavault.org/public arrakis partner" > /etc/apt/sources.list.d/openmediavault.list
-echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis partner" > /etc/apt/sources.list.d/openmediavault.list
+echo "deb [trusted=yes] http://downloads.sourceforge.net/project/openmediavault/packages arrakis partner" > /etc/apt/sources.list.d/openmediavault.list
 echo 'done'
 elif [[ $partnersdecision =~ (n) ]]
   then
