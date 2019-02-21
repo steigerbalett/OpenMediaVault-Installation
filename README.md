@@ -9,16 +9,24 @@ wget https://raw.githubusercontent.com/steigerbalett/OpenMediaVault-Installation
 
 sudo bash omv-rpi-install.sh
 
-Beware: The installation will disable ssh for user pi. You have to reactivate it thru the OMV webfrontend:
-Acces Rights Management -> Users -> Edit -> Groups -> tick the ssh box! Save -> Apply -> Yes
+##################
 
 After installation & reboot you have to access your OMV thru a browser http://x.x.x.x
 User: admin
 Password: openmediavault
 
+#################
 
+Beware: The installation will disable ssh for user pi. You have to reactivate it thru the OMV webfrontend:
+Acces Rights Management -> Users -> Edit -> Groups -> tick the ssh box! Save -> Apply -> Yes
 
-#######
+########
+
+If you installed OMV-Extras:
+Disable backport Repos:
+System -> OMV-Extras -> Backports -> tick the red button Disable Backports
+
+########
 
 sources:
 
