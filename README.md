@@ -24,3 +24,5 @@ https://openmediavault.readthedocs.io/en/latest/installation/on_debian.html
 https://forum.openmediavault.org/index.php/Thread/2140-Install-OMV-1-0-on-Debian-6-or-7-Squeeze-Wheezy-via-apt/
 
 https://forum.openmediavault.org/index.php/Thread/5549-OMV-Extras-org-Plugin/
+
+https://forum.armbian.com/topic/9044-openmediavault-from-softys-omv-keyring/
