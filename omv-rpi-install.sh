@@ -104,13 +104,14 @@ fi
 echo 'Step 1: Adding OpenMediaVault to the repository'
 echo ''
 cd /tmp
-wget http://packages.openmediavault.org/public/pool/main/o/openmediavault-keyring/openmediavault-keyring_1.0_all.deb
-sudo dpkg -i openmediavault-keyring_1.0_all.deb
-cd ..
+#wget http://packages.openmediavault.org/public/pool/main/o/openmediavault-keyring/openmediavault-keyring_1.0_all.deb
+#sudo dpkg -i openmediavault-keyring_1.0_all.deb
+#cd ..
 # Alternatives
-#sudo wget -O - http://packages.openmediavault.org/public/archive.key | sudo apt-key add -
+sudo wget -O - http://packages.openmediavault.org/public/archive.key | sudo apt-key add -
 #sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7E7A6C592EF35D13 24863F0C716B980B
-echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sources.list.d/openmediavault.list
+echo "deb http://packages.openmediavault.org/public/dists/arrakis/main/" > /etc/apt/sources.list.d/openmediavault.list
+#echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sources.list.d/openmediavault.list
 # Alternatives
 #echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis main"  > /etc/apt/sources.list.d/openmediavault.list
 
