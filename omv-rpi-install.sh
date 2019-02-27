@@ -86,6 +86,7 @@ fi
 # Adding OpenMediaVault to the repository
 echo 'Step 1: Adding OpenMediaVault to the repository'
 echo ''
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7E7A6C592EF35D13 24863F0C716B980B
 echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sources.list.d/openmediavault.list
 # Alternatives
 #echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis main"  > /etc/apt/sources.list.d/openmediavault.list
@@ -115,7 +116,7 @@ clear
 echo Step 2: Installing OpenMediaVault...
 sudo apt update && sudo apt full-upgrade -y
 sudo apt install dirmngr
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7E7A6C592EF35D13 24863F0C716B980B 
+
 #Option to generate new SSH Key
 echo -n 'Do you want generate a new SSH Key? [Y/n] '
 read sshdecision
