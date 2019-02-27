@@ -110,6 +110,7 @@ cd /tmp
 # Alternatives
 sudo wget -O - http://packages.openmediavault.org/public/archive.key | sudo apt-key add -
 #sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7E7A6C592EF35D13 24863F0C716B980B
+echo "deb http://packages.openmediavault.org public dists arrakis" > /etc/apt/sources.list.d/openmediavault.list
 echo "deb http://packages.openmediavault.org/public/dists/arrakis main debian-installer binary-armhf" > /etc/apt/sources.list.d/openmediavault.list
 #echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sources.list.d/openmediavault.list
 # Alternatives
