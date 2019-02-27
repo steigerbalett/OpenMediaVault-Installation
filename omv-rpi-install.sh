@@ -83,40 +83,8 @@ else
 fi
 
 
-# Adding OpenMediaVault to the repository
-echo 'Step 1: Adding OpenMediaVault to the repository'
-echo ''
-echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sources.list.d/openmediavault.list
-# Alternatives
-#echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis main"  > /etc/apt/sources.list.d/openmediavault.list
-## This software is not part of OpenMediaVault, but is offered by third-party
-## developers as a service to OpenMediaVault users.
-#echo -n 'Do you want install OMV third-party option to the repository? [Y/n] '
-#read partnersdecision
-#
-#if [[ $partnersdecision =~ (Y|y) ]]
-#  then
-#echo "deb http://packages.openmediavault.org/public arrakis partner" > /etc/apt/sources.list.d/openmediavault.list
-##echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis partner" > /etc/apt/sources.list.d/openmediavault.list
-#echo 'done'
-#elif [[ $partnersdecision =~ (n) ]]
-#  then
-#    echo 'No modifications was made'
-# else
-#    echo 'Invalid input!'
-#fi
-
-## This software is not part of OpenMediaVault, but is offered by third-party
-## developers as a service to OpenMediaVault users.
-# deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis partner
-
-#Installing OpenMediaVault
-clear
-echo Step 2: Installing OpenMediaVault...
-sudo apt update && sudo apt full-upgrade -y
-sudo apt install dirmngr
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7E7A6C592EF35D13 24863F0C716B980B 
 #Option to generate new SSH Key
+echo 'Step 2: Generate new SSH Key'
 echo -n 'Do you want generate a new SSH Key? [Y/n] '
 read sshdecision
 
@@ -132,6 +100,24 @@ elif [[ $sshdecision =~ (n) ]]
     echo 'Invalid input!'
 fi
 
+# Adding OpenMediaVault to the repository
+echo 'Step 1: Adding OpenMediaVault to the repository'
+echo ''
+cd /tmp
+#wget http://packages.openmediavault.org/public/pool/main/o/openmediavault-keyring/openmediavault-keyring_1.0_all.deb
+#sudo dpkg -i openmediavault-keyring_1.0_all.deb
+#cd ..
+# Alternatives
+sudo wget -O - http://packages.openmediavault.org/public/archive.key | sudo apt-key add -
+#sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7E7A6C592EF35D13 24863F0C716B980B
+echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sources.list.d/openmediavault.list
+# Alternatives
+#echo "deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis main"  > /etc/apt/sources.list.d/openmediavault.list
+
+#Installing OpenMediaVault
+echo Step 2: Installing OpenMediaVault...
+sudo apt update && sudo apt full-upgrade -y
+sudo apt install dirmngr
 sudo apt install ntfs-3g hdparm hfsutils hfsprogs exfat-fuse -y
 sudo apt update
 sudo apt install openmediavault-keyring postfix -y
