@@ -83,6 +83,24 @@ else
 fi
 
 
+#Option to generate new SSH Key
+echo 'Step 2: Generate new SSH Key'
+echo -n 'Do you want generate a new SSH Key? [Y/n] '
+read sshdecision
+
+if [[ $sshdecision =~ (Y|y) ]]
+  then
+sudo rm /etc/ssh/ssh_host_*
+sudo dpkg-reconfigure openssh-server
+echo 'done'
+elif [[ $sshdecision =~ (n) ]]
+  then
+    echo 'No modifications was made'
+ else
+    echo 'Invalid input!'
+fi
+
+
 # Adding OpenMediaVault to the repository
 echo 'Step 1: Adding OpenMediaVault to the repository'
 echo ''
@@ -112,27 +130,9 @@ echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sou
 # deb http://downloads.sourceforge.net/project/openmediavault/packages arrakis partner
 
 #Installing OpenMediaVault
-clear
 echo Step 2: Installing OpenMediaVault...
 sudo apt update && sudo apt full-upgrade -y
 sudo apt install dirmngr
-
-#Option to generate new SSH Key
-echo -n 'Do you want generate a new SSH Key? [Y/n] '
-read sshdecision
-
-if [[ $sshdecision =~ (Y|y) ]]
-  then
-sudo rm /etc/ssh/ssh_host_*
-sudo dpkg-reconfigure openssh-server
-echo 'done'
-elif [[ $sshdecision =~ (n) ]]
-  then
-    echo 'No modifications was made'
- else
-    echo 'Invalid input!'
-fi
-
 sudo apt install ntfs-3g hdparm hfsutils hfsprogs exfat-fuse -y
 sudo apt update
 sudo apt install openmediavault-keyring postfix -y
