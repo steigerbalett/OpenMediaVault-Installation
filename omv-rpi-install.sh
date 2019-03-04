@@ -118,8 +118,14 @@ echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sou
 echo Step 2: Installing OpenMediaVault...
 sudo apt update && sudo apt full-upgrade -y
 sudo apt install dirmngr
-sudo apt install ntfs-3g hdparm hfsutils hfsprogs exfat-fuse -y
-sudo apt update
+sudo apt install ntfs-3g hdparm hfsutils hfsprogs exfat-fuse watchdog -y
+sudo modprobe bcm2835_wdt
+echo "bcm2835_wdt" | sudo tee -a /etc/modules
+echo "watchdog-device        = /dev/watchdog" >> /etc/watchdog.conf
+echo "max-load-1             = 24" >> /etc/watchdog.conf
+echo "WantedBy=multi-user.target" >> /lib/systemd/system/watchdog.service
+sudo systemctl enable watchdog.service
+echo sudo apt update
 sudo apt install openmediavault-keyring postfix -y
 sudo apt update
 sudo apt install openmediavault -y
