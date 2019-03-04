@@ -118,14 +118,14 @@ echo "deb http://packages.openmediavault.org/public arrakis main" > /etc/apt/sou
 echo Step 2: Installing OpenMediaVault...
 sudo apt update && sudo apt full-upgrade -y
 sudo apt install dirmngr
-sudo apt install ntfs-3g hdparm hfsutils hfsprogs exfat-fuse watchdog -y
+sudo apt install ntfs-3g hdparm hfsutils hfsprogs exfat-fuse watchdog resolvconf -y
+echo sudo apt update
 sudo modprobe bcm2835_wdt
 echo "bcm2835_wdt" | sudo tee -a /etc/modules
 echo "watchdog-device        = /dev/watchdog" >> /etc/watchdog.conf
 echo "max-load-1             = 24" >> /etc/watchdog.conf
 echo "WantedBy=multi-user.target" >> /lib/systemd/system/watchdog.service
 sudo systemctl enable watchdog.service
-echo sudo apt update
 sudo apt install openmediavault-keyring postfix -y
 sudo apt update
 sudo apt install openmediavault -y
@@ -134,7 +134,7 @@ sudo apt install openmediavault -y
 sudo apt --fix-broken install -y
 
 # Initialize the system and database.
-omv-initsystem
+sudo omv-initsystem
 
 # Install Extras
 echo -n 'Do you want install OMV Extras? [Y/n] '
@@ -152,13 +152,13 @@ elif [[ $extrasdecision =~ (n) ]]
 fi
 
 # Config autostart of OMV
-echo 'Step 5: enable autostart'
-sudo systemctl enable openmediavault
-sudo systemctl start openmediavault
+#echo 'Step 5: enable autostart'
+#sudo systemctl enable openmediavault
+#sudo systemctl start openmediavault
 
 # Raspi 24/7
-echo 'Step 6: Prepare for 24/7 use'
-echo "none /var/log tmpfs size=5M,noatime 00" >> /etc/fstab
+#echo 'Step 6: Prepare for 24/7 use'
+#echo "none /var/log tmpfs size=128M,noatime 00" >> /etc/fstab
 
 # SHH back to pi
 sudo usermod pi -G ssh
