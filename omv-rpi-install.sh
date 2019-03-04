@@ -131,7 +131,7 @@ sudo apt update
 sudo apt install openmediavault -y
 
 # check for dependencies
-sudo apt --fix-broken install -y
+sudo apt install -f -y
 
 # Initialize the system and database.
 sudo omv-initsystem
