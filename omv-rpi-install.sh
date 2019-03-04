@@ -160,6 +160,9 @@ sudo systemctl start openmediavault
 echo 'Step 6: Prepare for 24/7 use'
 echo "none /var/log tmpfs size=5M,noatime 00" >> /etc/fstab
 
+# SHH back to pi
+sudo pw usermod pi -G ssh
+
 echo 'OpenMediaVault has been installed & modified to your preference (if any)!'
 echo 'Share this with others if this script has helped you!'
 echo 'After reboot you can login to OMV thru a browser with'
