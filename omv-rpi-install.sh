@@ -142,7 +142,7 @@ read extrasdecision
 
 if [[ $extrasdecision =~ (Y|y) ]]
   then
-sudo wget -O - http://omv-extras.org/install | bash
+sudo wget -O - http://omv-extras.org/install | sudo bash
     echo 'done'
 elif [[ $extrasdecision =~ (n) ]]
   then
